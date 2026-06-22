@@ -404,7 +404,7 @@ export default function Portfolio() {
                     </div>
                     <div className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-gray-400">
                       <span className="text-base flex-shrink-0">🎓</span>
-                      2022–2026, Himalaya CoE
+                      2022–2026, Himalaya College of Engineering (IOE)
                     </div>
                     <div className="flex items-center gap-2.5 text-sm">
                       <span className="relative flex h-2 w-2 flex-shrink-0">
