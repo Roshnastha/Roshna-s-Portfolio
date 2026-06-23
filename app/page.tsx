@@ -17,16 +17,17 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 
 export default function Portfolio() {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme")
-    if (savedTheme === "dark") {
+    if (savedTheme === "light") {
+      setIsDark(false)
+      document.documentElement.classList.remove("dark")
+    } else {
       setIsDark(true)
       document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
     }
   }, [])
 
@@ -186,11 +187,11 @@ export default function Portfolio() {
         </p>
       </div>
 
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-[#F8F7F3]/96 dark:bg-[#0C0C15]/96 backdrop-blur-md border-b border-[#E8E6E2] dark:border-[#232330] transition-colors duration-300">
+      {/* Navigation — always dark */}
+      <nav className="sticky top-0 z-50 bg-[#0A0A12]/95 backdrop-blur-md border-b border-[#1E1E2A] transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="text-sm font-bold tracking-[0.05em] text-[#141422] dark:text-[#EEECF0] font-display">
+            <div className="text-sm font-bold tracking-[0.05em] text-[#EEECF0] font-display">
               Roshna Shrestha
             </div>
 
@@ -200,7 +201,7 @@ export default function Portfolio() {
                 <Link
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-[11px] tracking-[0.18em] uppercase text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#00C896] dark:hover:text-[#00C896] transition-colors font-code"
+                  className="text-[11px] tracking-[0.18em] uppercase text-[#6B6A78] hover:text-[#00C896] transition-colors font-code"
                 >
                   {item}
                 </Link>
@@ -208,7 +209,7 @@ export default function Portfolio() {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#00C896] dark:hover:text-[#00C896] transition-colors"
+                className="text-[#6B6A78] hover:text-[#00C896] transition-colors"
               >
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
@@ -219,14 +220,14 @@ export default function Portfolio() {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#00C896] dark:hover:text-[#00C896] transition-colors"
+                className="text-[#6B6A78] hover:text-[#00C896] transition-colors"
               >
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
-                className="text-[#6B6A78] dark:text-[#8C8B99]"
+                className="text-[#8C8B99]"
               >
                 {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -235,13 +236,13 @@ export default function Portfolio() {
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden pb-4 pt-1 border-t border-[#E8E6E2] dark:border-[#232330] space-y-1">
+            <div className="md:hidden pb-4 pt-1 border-t border-[#1E1E2A] space-y-1">
               {navLinks.map((item) => (
                 <Link
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={closeMenu}
-                  className="block py-2.5 text-[11px] tracking-[0.18em] uppercase text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#00C896] dark:hover:text-[#00C896] transition-colors font-code"
+                  className="block py-2.5 text-[11px] tracking-[0.18em] uppercase text-[#6B6A78] hover:text-[#00C896] transition-colors font-code"
                 >
                   {item}
                 </Link>
@@ -251,16 +252,19 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Soft mint glow — light */}
+      {/* Hero — always dark */}
+      <section className="relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0A0A12]">
+        {/* Circuit grid — subtle texture */}
         <div
-          className="absolute -top-20 -right-20 w-[700px] h-[500px] rounded-full bg-[#00C896] opacity-[0.04] blur-[120px] pointer-events-none dark:hidden"
+          className="absolute inset-0 pointer-events-none opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0,200,150,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,150,0.06) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
         />
-        {/* Soft mint glow — dark */}
-        <div
-          className="absolute -top-20 -right-20 w-[700px] h-[500px] rounded-full bg-[#00C896] opacity-[0.07] blur-[120px] pointer-events-none hidden dark:block"
-        />
+        {/* Mint glow — top right */}
+        <div className="absolute -top-20 -right-20 w-[700px] h-[500px] rounded-full bg-[#00C896] opacity-[0.08] blur-[130px] pointer-events-none" />
 
         {/* Background photo — watermark treatment */}
         <div className="absolute inset-y-0 right-0 w-[55%] pointer-events-none select-none" aria-hidden="true">
@@ -280,27 +284,29 @@ export default function Portfolio() {
               />
             </div>
           </div>
-          {/* Fade from bg color on left edge */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F8F7F3] via-[#F8F7F3]/20 to-transparent dark:from-[#0C0C15] dark:via-[#0C0C15]/20" />
-          {/* Fade from bg color on bottom edge */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F8F7F3]/50 to-transparent dark:from-[#0C0C15]/50" />
+          {/* Fade from dark bg on left edge */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A12] via-[#0A0A12]/25 to-transparent" />
+          {/* Fade from dark bg on bottom edge */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A12]/60 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto">
           <div className="max-w-2xl">
             <div>
               {/* Eyebrow */}
-              <p className="text-[11px] tracking-[0.3em] uppercase text-[#6B6A78] dark:text-[#8C8B99] mb-6 font-code">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-[#6B6A78] mb-6 font-code">
                 Computer Engineer · Kathmandu, Nepal
               </p>
 
               {/* Main headline */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold text-[#141422] dark:text-[#EEECF0] leading-[1.05] tracking-tight mb-6">
-                Building systems that authenticate reality.
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold text-[#EEECF0] leading-[1.02] tracking-tight mb-6">
+                Building systems that{" "}
+                <span className="text-[#00C896]">authenticate</span>{" "}
+                reality.
               </h1>
 
               {/* Description */}
-              <p className="text-base sm:text-lg text-[#6B6A78] dark:text-[#8C8B99] mb-8 leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg text-[#8C8B99] mb-8 leading-relaxed max-w-xl">
                 I work at the intersection of AI detection, blockchain, and full-stack engineering — turning technically hard problems into working systems.
               </p>
 
@@ -321,7 +327,7 @@ export default function Portfolio() {
                 <Link
                   href="/Roshna-Shrestha-CV.pdf"
                   download
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#141422] dark:bg-[#EEECF0] text-[#F8F7F3] dark:text-[#141422] text-sm font-semibold hover:bg-[#00C896] dark:hover:bg-[#00C896] dark:hover:text-white transition-colors rounded-sm font-display"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#00C896] text-white text-sm font-semibold hover:bg-[#00A07A] transition-colors rounded-sm font-display"
                 >
                   <Download className="w-4 h-4" />
                   Download CV
@@ -331,7 +337,7 @@ export default function Portfolio() {
                     href="https://github.com/Roshnastha"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#141422] dark:hover:text-[#EEECF0] transition-colors"
+                    className="text-[#6B6A78] hover:text-[#EEECF0] transition-colors"
                     aria-label="GitHub"
                   >
                     <Github className="w-5 h-5" />
@@ -340,14 +346,14 @@ export default function Portfolio() {
                     href="https://www.linkedin.com/in/roshna-shrestha-189057320"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#141422] dark:hover:text-[#EEECF0] transition-colors"
+                    className="text-[#6B6A78] hover:text-[#EEECF0] transition-colors"
                     aria-label="LinkedIn"
                   >
                     <Linkedin className="w-5 h-5" />
                   </Link>
                   <Link
                     href="mailto:roshna.w3@gmail.com"
-                    className="text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#141422] dark:hover:text-[#EEECF0] transition-colors"
+                    className="text-[#6B6A78] hover:text-[#EEECF0] transition-colors"
                     aria-label="Email"
                   >
                     <Mail className="w-5 h-5" />
@@ -356,7 +362,7 @@ export default function Portfolio() {
               </div>
 
               {/* Location + status — below hairline */}
-              <div className="pt-8 border-t border-[#E8E6E2] dark:border-[#232330] flex flex-wrap items-center gap-5 text-xs text-[#6B6A78] dark:text-[#8C8B99]">
+              <div className="pt-8 border-t border-[#1E1E2A] flex flex-wrap items-center gap-5 text-xs text-[#6B6A78]">
                 <span className="flex items-center gap-1.5 font-code">
                   <MapPin className="w-3.5 h-3.5 text-[#00C896]" />
                   Gyaneshwor, Kathmandu
@@ -374,16 +380,83 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* About */}
-      <section
-        id="about"
-        className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#14141E] border-y border-[#E8E6E2] dark:border-[#232330] transition-colors duration-300"
-      >
+      {/* Projects — leads with work */}
+      <section id="projects" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#14141E] border-y border-[#E8E6E2] dark:border-[#232330]">
+        <div className="max-w-6xl mx-auto">
+          <SectionHeader eyebrow="Work" title="Featured Projects" />
+
+          {/* Featured project — full width dark card */}
+          <div
+            className="group relative mb-5 p-8 bg-[#0A0A12] border border-[#1E1E2A] rounded-sm hover:border-[#00C896]/40 hover:shadow-xl hover:shadow-[#00C896]/5 transition-all duration-200 cursor-pointer"
+            onClick={() => window.open(projects[0].github, "_blank")}
+          >
+            <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-[#00C896]" />
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <span className="text-[11px] font-code text-[#00C896]/60">01</span>
+              <ExternalLink className="w-3.5 h-3.5 text-[#6B6A78] group-hover:text-[#00C896] transition-colors flex-shrink-0" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#EEECF0] group-hover:text-[#00C896] transition-colors mb-3 font-display">
+              {projects[0].title}
+            </h3>
+            <p className="text-sm text-[#8C8B99] leading-relaxed mb-5 max-w-2xl">
+              {projects[0].description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {projects[0].tech.map((tech, ti) => (
+                <span key={ti} className="text-[10px] font-code px-2.5 py-1 rounded-sm bg-[#00C896]/10 text-[#00C896] border border-[#00C896]/20">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Remaining projects — 2-col grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+            {projects.slice(1).map((project, index) => (
+              <div
+                key={index}
+                className="group relative p-6 bg-white dark:bg-[#14141E] border border-[#E8E6E2] dark:border-[#232330] rounded-sm hover:border-[#00C896]/40 dark:hover:border-[#00C896]/40 hover:shadow-lg hover:shadow-[#00C896]/5 transition-all duration-200"
+              >
+                <div className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-transparent group-hover:bg-[#00C896] transition-colors duration-200" />
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <span className="text-[11px] font-code text-[#00C896]/60 dark:text-[#00C896]/50">
+                    {String(index + 2).padStart(2, "0")}
+                  </span>
+                  <button
+                    onClick={() => window.open(project.github, "_blank")}
+                    className="flex-shrink-0 text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#00C896] dark:hover:text-[#00C896] transition-colors"
+                    aria-label="View on GitHub"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+                <h3 className="text-sm font-semibold text-[#141422] dark:text-[#EEECF0] group-hover:text-[#00C896] dark:group-hover:text-[#00C896] transition-colors leading-snug mb-2 font-display">
+                  {project.title}
+                </h3>
+                <p className="text-xs text-[#6B6A78] dark:text-[#8C8B99] leading-relaxed mb-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tech.map((tech, ti) => (
+                    <span key={ti} className="text-[10px] font-code px-2 py-0.5 rounded-sm bg-[#F8F7F3] dark:bg-[#0C0C15] text-[#6B6A78] dark:text-[#8C8B99] border border-[#E8E6E2] dark:border-[#232330] group-hover:border-[#00C896]/25 group-hover:text-[#007A5E] dark:group-hover:text-[#00C896] transition-colors">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About + Skills — combined into one section */}
+      <section id="about" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <SectionHeader eyebrow="About" title="Who I am" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 lg:gap-16">
-            {/* Bio + stats */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+            {/* Left: bio + stats + education */}
             <div>
               <div className="space-y-4 mb-10">
                 <p className="text-base text-[#6B6A78] dark:text-[#8C8B99] leading-relaxed">
@@ -394,26 +467,20 @@ export default function Portfolio() {
                 </p>
               </div>
 
-              {/* Stats */}
-              <div className="flex gap-10">
+              <div className="flex gap-10 mb-10 pb-10 border-b border-[#E8E6E2] dark:border-[#232330]">
                 {[
                   { value: "2+", label: "Internships" },
                   { value: "5+", label: "Projects" },
                   { value: "4", label: "Tech Domains" },
                 ].map((stat) => (
                   <div key={stat.label}>
-                    <p className="text-3xl font-bold text-[#141422] dark:text-[#EEECF0] font-display">{stat.value}</p>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#6B6A78] dark:text-[#8C8B99] mt-1 font-code">{stat.label}</p>
+                    <p className="text-5xl font-bold text-[#141422] dark:text-[#EEECF0] font-display">{stat.value}</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#6B6A78] dark:text-[#8C8B99] mt-2 font-code">{stat.label}</p>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* Education */}
-            <div>
-              <p className="text-[10px] tracking-[0.25em] uppercase text-[#6B6A78] dark:text-[#8C8B99] mb-5 font-code">
-                Education
-              </p>
+              <p className="text-[10px] tracking-[0.25em] uppercase text-[#6B6A78] dark:text-[#8C8B99] mb-5 font-code">Education</p>
               <div className="space-y-5">
                 {education.map((edu, index) => (
                   <div key={index} className="flex gap-3">
@@ -421,102 +488,57 @@ export default function Portfolio() {
                       <div className="w-1.5 h-1.5 rounded-full bg-[#00C896]" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#141422] dark:text-[#EEECF0] leading-tight font-display">
-                        {edu.degree}
-                      </p>
+                      <p className="text-sm font-semibold text-[#141422] dark:text-[#EEECF0] leading-tight font-display">{edu.degree}</p>
                       <p className="text-xs text-[#6B6A78] dark:text-[#8C8B99] mt-0.5 leading-snug">{edu.institution}</p>
-                      <p className="text-xs text-[#00C896] mt-1 font-code">
-                        {edu.year} · GPA {edu.gpa}
-                      </p>
+                      <p className="text-xs text-[#00C896] mt-1 font-code">{edu.year} · GPA {edu.gpa}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Right: all skills */}
+            <div id="skills">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-[#00C896] mb-6 font-code">Skills</p>
+              <div className="divide-y divide-[#E8E6E2] dark:divide-[#232330]">
+                <div className="pb-6">
+                  <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-3">Languages</p>
+                  <div className="flex flex-wrap gap-2">
+                    {programmingSkills.map((skill) => (
+                      <span key={skill} className="text-xs font-code px-3 py-1.5 rounded-sm border border-[#E8E6E2] dark:border-[#232330] text-[#141422] dark:text-[#EEECF0] hover:border-[#00C896] hover:text-[#00C896] dark:hover:border-[#00C896] dark:hover:text-[#00C896] transition-colors cursor-default">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="py-6">
+                  <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-3">Frameworks & Tools</p>
+                  <div className="flex flex-wrap gap-2">
+                    {technicalSkills.map((skill) => (
+                      <span key={skill} className="text-xs font-code px-3 py-1.5 rounded-sm bg-[#00C896]/10 dark:bg-[#00C896]/15 text-[#007A5E] dark:text-[#00C896] border border-[#00C896]/25 hover:bg-[#00C896] hover:text-white dark:hover:bg-[#00C896] dark:hover:text-white transition-colors cursor-default">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="pt-6">
+                  <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-3">Soft Skills</p>
+                  <div className="flex flex-wrap gap-2">
+                    {softSkills.map((skill) => (
+                      <span key={skill} className="text-xs font-code px-3 py-1.5 rounded-sm border border-[#E8E6E2] dark:border-[#232330] text-[#141422] dark:text-[#EEECF0] hover:border-[#00C896] hover:text-[#00C896] dark:hover:border-[#00C896] dark:hover:text-[#00C896] transition-colors cursor-default">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Skills */}
-      <section id="skills" className="py-16 sm:py-20 md:py-24">
-        <style>{`
-          .marquee-left  { animation: marquee-left  30s linear infinite; }
-          .marquee-right { animation: marquee-right 38s linear infinite; }
-          .marquee-slow  { animation: marquee-left  24s linear infinite; }
-          .marquee-left:hover,
-          .marquee-right:hover,
-          .marquee-slow:hover { animation-play-state: paused; }
-          .marquee-mask {
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-          }
-        `}</style>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-          <SectionHeader eyebrow="Skills" title="Technologies" />
-        </div>
-
-        <div className="space-y-8">
-          {/* Languages */}
-          <div>
-            <p className="text-center text-[10px] tracking-[0.3em] uppercase text-[#6B6A78] dark:text-[#8C8B99] mb-4 font-code">
-              Languages
-            </p>
-            <div className="overflow-hidden marquee-mask">
-              <div className="flex gap-3 marquee-left" style={{ width: "max-content" }}>
-                {Array(4).fill(programmingSkills).flat().map((skill, i) => (
-                  <span
-                    key={i}
-                    className="flex-shrink-0 inline-flex items-center px-4 py-2 rounded-sm border border-[#E8E6E2] dark:border-[#232330] text-[#141422] dark:text-[#EEECF0] bg-white dark:bg-[#14141E] text-xs font-medium tracking-wide hover:border-[#00C896] hover:text-[#00C896] dark:hover:border-[#00C896] dark:hover:text-[#00C896] transition-colors cursor-default font-code"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Frameworks & Tools */}
-          <div>
-            <p className="text-center text-[10px] tracking-[0.3em] uppercase text-[#6B6A78] dark:text-[#8C8B99] mb-4 font-code">
-              Frameworks & Tools
-            </p>
-            <div className="overflow-hidden marquee-mask">
-              <div className="flex gap-3 marquee-right" style={{ width: "max-content" }}>
-                {Array(3).fill(technicalSkills).flat().map((skill, i) => (
-                  <span
-                    key={i}
-                    className="flex-shrink-0 inline-flex items-center px-4 py-2 rounded-sm bg-[#00C896] text-white text-xs font-semibold tracking-wide hover:bg-[#00A07A] transition-colors cursor-default font-code"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Soft Skills */}
-          <div>
-            <p className="text-center text-[10px] tracking-[0.3em] uppercase text-[#6B6A78] dark:text-[#8C8B99] mb-4 font-code">
-              Soft Skills
-            </p>
-            <div className="overflow-hidden marquee-mask">
-              <div className="flex gap-3 marquee-slow" style={{ width: "max-content" }}>
-                {Array(6).fill(softSkills).flat().map((skill, i) => (
-                  <span
-                    key={i}
-                    className="flex-shrink-0 inline-flex items-center px-4 py-2 rounded-full bg-[#00C896]/10 dark:bg-[#00C896]/15 text-[#007A5E] dark:text-[#00C896] text-xs font-medium tracking-wide hover:bg-[#00C896]/20 transition-colors cursor-default font-code"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience */}
+      {/* Experience — two columns: work vs training */}
       <section
         id="experience"
         className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#14141E] border-y border-[#E8E6E2] dark:border-[#232330] transition-colors duration-300"
@@ -524,93 +546,52 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <SectionHeader eyebrow="Experience" title="Training & Work" />
 
-          <div className="relative">
-            {/* Connector line */}
-            <div className="absolute left-[7px] top-2 bottom-2 w-[2px] bg-[#E8E6E2] dark:bg-[#232330]" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
-            <div className="space-y-10">
-              {experiences.map((exp, index) => (
-                <div key={index} className="relative flex gap-8 pl-9 group">
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-[#F8F7F3] dark:bg-[#0C0C15] border-2 border-[#00C896] group-hover:bg-[#00C896] transition-colors flex-shrink-0" />
-
-                  <div className="flex-1 min-w-0 pb-4 border-b border-transparent group-hover:border-[#E8E6E2] dark:group-hover:border-[#232330] transition-colors">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#00C896] mb-1 font-code">
-                      {exp.period}
-                    </p>
-                    <h3 className="text-base font-semibold text-[#141422] dark:text-[#EEECF0] leading-tight font-display">
-                      {exp.title}
-                    </h3>
-                    <p className="text-sm text-[#6B6A78] dark:text-[#8C8B99] mb-2">{exp.company}</p>
-                    <p className="text-sm text-[#6B6A78] dark:text-[#8C8B99] leading-relaxed mb-3">
-                      {exp.description}
-                    </p>
+            {/* Left: real work (internships) */}
+            <div>
+              <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-6">Work Experience</p>
+              <div className="space-y-4">
+                {experiences.slice(0, 2).map((exp, index) => (
+                  <div key={index} className="group p-5 border border-[#E8E6E2] dark:border-[#232330] rounded-sm hover:border-[#00C896]/40 dark:hover:border-[#00C896]/40 transition-colors">
+                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#00C896] mb-1 font-code">{exp.period}</p>
+                    <h3 className="text-base font-semibold text-[#141422] dark:text-[#EEECF0] leading-tight font-display">{exp.title}</h3>
+                    <p className="text-sm text-[#6B6A78] dark:text-[#8C8B99] mb-3">{exp.company}</p>
+                    <p className="text-sm text-[#6B6A78] dark:text-[#8C8B99] leading-relaxed mb-3">{exp.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {exp.skills.map((skill, si) => (
-                        <span
-                          key={si}
-                          className="text-[11px] px-2.5 py-0.5 rounded-sm bg-[#F8F7F3] dark:bg-[#0C0C15] text-[#6B6A78] dark:text-[#8C8B99] border border-[#E8E6E2] dark:border-[#232330] font-code"
-                        >
-                          {skill}
-                        </span>
+                        <span key={si} className="text-[11px] px-2.5 py-0.5 rounded-sm bg-[#F8F7F3] dark:bg-[#0C0C15] text-[#6B6A78] dark:text-[#8C8B99] border border-[#E8E6E2] dark:border-[#232330] font-code">{skill}</span>
                       ))}
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section id="projects" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="Work" title="Featured Projects" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="group relative p-6 bg-white dark:bg-[#14141E] border border-[#E8E6E2] dark:border-[#232330] rounded-sm hover:border-[#00C896]/40 dark:hover:border-[#00C896]/40 hover:shadow-lg hover:shadow-[#00C896]/5 transition-all duration-200"
-              >
-                {/* Left accent bar — appears on hover */}
-                <div className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-transparent group-hover:bg-[#00C896] transition-colors duration-200" />
-
-                {/* Number + link row */}
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <span className="text-[11px] font-code text-[#00C896]/60 dark:text-[#00C896]/50">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <button
-                    onClick={() => window.open(project.github, "_blank")}
-                    className="flex-shrink-0 text-[#6B6A78] dark:text-[#8C8B99] hover:text-[#00C896] dark:hover:text-[#00C896] transition-colors"
-                    aria-label="View on GitHub"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-
-                <h3 className="text-sm font-semibold text-[#141422] dark:text-[#EEECF0] group-hover:text-[#00C896] dark:group-hover:text-[#00C896] transition-colors leading-snug mb-2 font-display">
-                  {project.title}
-                </h3>
-
-                <p className="text-xs text-[#6B6A78] dark:text-[#8C8B99] leading-relaxed mb-4">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((tech, ti) => (
-                    <span
-                      key={ti}
-                      className="text-[10px] font-code px-2 py-0.5 rounded-sm bg-[#F8F7F3] dark:bg-[#0C0C15] text-[#6B6A78] dark:text-[#8C8B99] border border-[#E8E6E2] dark:border-[#232330] group-hover:border-[#00C896]/25 group-hover:text-[#007A5E] dark:group-hover:text-[#00C896] transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Right: training & certifications (smaller) */}
+            <div>
+              <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-6">Training & Certifications</p>
+              <div className="space-y-5">
+                {experiences.slice(2).map((exp, index) => (
+                  <div key={index} className="flex gap-3 pb-5 border-b border-[#E8E6E2] dark:border-[#232330] last:border-0 last:pb-0">
+                    <div className="pt-1.5 flex-shrink-0">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00C896]" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] tracking-[0.2em] uppercase text-[#00C896] mb-0.5 font-code">{exp.period}</p>
+                      <h3 className="text-sm font-semibold text-[#141422] dark:text-[#EEECF0] font-display">{exp.title}</h3>
+                      <p className="text-xs text-[#6B6A78] dark:text-[#8C8B99] mb-2">{exp.company}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {exp.skills.map((skill, si) => (
+                          <span key={si} className="text-[10px] px-2 py-0.5 rounded-sm bg-[#F8F7F3] dark:bg-[#0C0C15] text-[#6B6A78] dark:text-[#8C8B99] border border-[#E8E6E2] dark:border-[#232330] font-code">{skill}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
