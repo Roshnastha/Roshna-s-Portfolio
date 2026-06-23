@@ -385,34 +385,9 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <SectionHeader eyebrow="Work" title="Featured Projects" />
 
-          {/* Featured project — full width dark card */}
-          <div
-            className="group relative mb-5 p-8 bg-[#0A0A12] border border-[#1E1E2A] rounded-sm hover:border-[#00C896]/40 hover:shadow-xl hover:shadow-[#00C896]/5 transition-all duration-200 cursor-pointer"
-            onClick={() => window.open(projects[0].github, "_blank")}
-          >
-            <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-[#00C896]" />
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <span className="text-[11px] font-code text-[#00C896]/60">01</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#6B6A78] group-hover:text-[#00C896] transition-colors flex-shrink-0" />
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#EEECF0] group-hover:text-[#00C896] transition-colors mb-3 font-display">
-              {projects[0].title}
-            </h3>
-            <p className="text-sm text-[#8C8B99] leading-relaxed mb-5 max-w-2xl">
-              {projects[0].description}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {projects[0].tech.map((tech, ti) => (
-                <span key={ti} className="text-[10px] font-code px-2.5 py-1 rounded-sm bg-[#00C896]/10 text-[#00C896] border border-[#00C896]/20">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Remaining projects — 2-col grid */}
+          {/* All projects — uniform 2-col grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-            {projects.slice(1).map((project, index) => (
+            {projects.map((project, index) => (
               <div
                 key={index}
                 className="group relative p-6 bg-white dark:bg-[#14141E] border border-[#E8E6E2] dark:border-[#232330] rounded-sm hover:border-[#00C896]/40 dark:hover:border-[#00C896]/40 hover:shadow-lg hover:shadow-[#00C896]/5 transition-all duration-200"
@@ -420,7 +395,7 @@ export default function Portfolio() {
                 <div className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-transparent group-hover:bg-[#00C896] transition-colors duration-200" />
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <span className="text-[11px] font-code text-[#00C896]/60 dark:text-[#00C896]/50">
-                    {String(index + 2).padStart(2, "0")}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                   <button
                     onClick={() => window.open(project.github, "_blank")}
