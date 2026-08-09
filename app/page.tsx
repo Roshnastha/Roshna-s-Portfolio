@@ -117,6 +117,13 @@ export default function Portfolio() {
 
   const projects = [
     {
+      title: "MoodTunes — AI Music Recommendation System",
+      description:
+        "AI-powered music recommender that detects a user's facial emotion via a CNN-based model and suggests songs matched to their mood, using Hugging Face for intelligent recommendations through a simple web interface.",
+      tech: ["CNN", "Computer Vision", "Hugging Face", "Emotion Detection"],
+      github: "https://mood-tunes-sj73.vercel.app/",
+    },
+    {
       title: "AI-Generated Video Detection System",
       description:
         "Hybrid deep learning model combining spatial and temporal analysis to detect AI-generated (deepfake) videos. Enhanced detection accuracy for manipulated media.",
@@ -151,7 +158,14 @@ export default function Portfolio() {
       tech: ["Solidity", "Web3", "MetaMask", "Blockchain"],
       github: "https://github.com/Roshnastha/NFT-ticket.git",
     },
-    
+    {
+      title: "Konecting — Hyper-Local Social Discovery App",
+      description:
+        "Intent-driven social discovery app for Kathmandu Valley: users broadcast time-bound activity plans, nearby people with the same intent respond via 'Waves,' and matches meet up in public places. Built with a geo-bounded, trust-first design — OTP verification, expiring posts, and report/block controls.",
+      tech: ["React Native", "Expo", "FastAPI", "PostGIS", "Redis"],
+      github: "https://github.com/Roshnastha/Konnecting.git",
+    },
+
   ]
 
   const education = [
@@ -445,7 +459,7 @@ export default function Portfolio() {
               <div className="flex gap-10 mb-10 pb-10 border-b border-[#E8E6E2] dark:border-[#232330]">
                 {[
                   { value: "2+", label: "Internships" },
-                  { value: "5+", label: "Projects" },
+                  { value: "6+", label: "Projects" },
                   { value: "4", label: "Tech Domains" },
                 ].map((stat) => (
                   <div key={stat.label}>
