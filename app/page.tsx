@@ -47,11 +47,19 @@ export default function Portfolio() {
 
   const experiences = [
     {
-      title: "Full Stack Internship",
-      company: "Project Health",
-      period: "Aug 2026 – Present",
+      title: "AI Security Engineer",
+      company: "Waft X Inc",
+      period: "Nov 2026 – Present",
       description:
-        "Working as a full-stack engineer on an EMR (Electronic Medical Records) system, building and maintaining production features for clinical workflows. Collaborating on scalable application development, clean API design, and modern web practices.",
+        "Working on AI security — hardening AI-driven systems and applications against model- and application-level threats.",
+      skills: ["AI Security", "Python", "Threat Analysis"],
+    },
+    {
+      title: "Full Stack Developer",
+      company: "Project Health",
+      period: "Aug – Nov 2026",
+      description:
+        "Worked as a full-stack engineer on an EMR (Electronic Medical Records) system, building and maintaining production features for clinical workflows. Collaborated on scalable application development, clean API design, and modern web practices.",
       skills: ["React", "Node.js", "EMR", "Full-Stack Development"],
     },
     {
@@ -474,7 +482,7 @@ export default function Portfolio() {
 
               <div className="flex gap-10 mb-10 pb-10 border-b border-[#E8E6E2] dark:border-[#232330]">
                 {[
-                  { value: "4", label: "Internships" },
+                  { value: "5", label: "Roles" },
                   { value: "6+", label: "Projects" },
                   { value: "4", label: "Tech Domains" },
                 ].map((stat) => (
@@ -557,7 +565,7 @@ export default function Portfolio() {
             <div>
               <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-6">Work Experience</p>
               <div className="space-y-4">
-                {experiences.slice(0, 4).map((exp, index) => (
+                {experiences.slice(0, 5).map((exp, index) => (
                   <div key={index} className="group p-5 border border-[#E8E6E2] dark:border-[#232330] rounded-sm hover:border-[#00C896]/40 dark:hover:border-[#00C896]/40 transition-colors">
                     <p className="text-[10px] tracking-[0.2em] uppercase text-[#00C896] mb-1 font-code">{exp.period}</p>
                     <h3 className="text-base font-semibold text-[#141422] dark:text-[#EEECF0] leading-tight font-display">{exp.title}</h3>
@@ -577,7 +585,7 @@ export default function Portfolio() {
             <div>
               <p className="text-[10px] tracking-[0.25em] uppercase font-code text-[#6B6A78] dark:text-[#8C8B99] mb-6">Training & Certifications</p>
               <div className="space-y-5">
-                {experiences.slice(4).map((exp, index) => (
+                {experiences.slice(5).map((exp, index) => (
                   <div key={index} className="flex gap-3 pb-5 border-b border-[#E8E6E2] dark:border-[#232330] last:border-0 last:pb-0">
                     <div className="pt-1.5 flex-shrink-0">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#00C896]" />
